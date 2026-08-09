@@ -2,6 +2,8 @@
 
 <section class="max-w-2xl min-w-full-mx mr-3 mx-auto mt-12 p-4 bg-white shadow-md border border-gray-200 rounded">
   <form method="POST" class="grid grid-cols-1 gap-6">
+    <?php include $this->resolve('Partials/_csrf.php'); ?>
+
     <!-- Email -->
     <label class="block">
       <span class="text-gray-700">Email address</span>
@@ -75,21 +77,7 @@
     </button>
   </form>
 
-  <script>
-    document.querySelectorAll('form input, form select').forEach((field) => {
-      field.addEventListener('input', () => {
-        const hasValue = field.type === 'checkbox' ? field.checked : field.value.trim() !== '';
-        if (!hasValue) return;
-
-        document.querySelectorAll(`.field-error[data-field="${field.name}"]`).forEach((error) => {
-          error.remove();
-        });
-
-        field.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-200');
-        field.classList.add('border-gray-300', 'focus:border-indigo-300', 'focus:ring-indigo-200');
-      });
-    });
-  </script>
+  <script src="/assets/field-validation.js"></script>
 </section>
 
 <?php include $this->resolve("Partials/_footer.php"); ?>
